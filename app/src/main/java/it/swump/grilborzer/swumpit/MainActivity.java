@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * GUI components
      */
+    private ImageView imgViewTop;
     private ImageView imgViewFile;
     private ImageView imgViewInfo;
     private TextView txtViewFileName;
@@ -42,11 +44,30 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Initialize all GUI components
          */
+        imgViewTop = findViewById(R.id.imgViewTop);
         imgViewFile = findViewById(R.id.imgViewFile);
         imgViewInfo = findViewById(R.id.imgViewInfo);
         txtViewFileName = findViewById(R.id.txtViewFileName);
         txtViewPickFile = findViewById(R.id.txtViewPickFile);
         txtViewSendFile = findViewById(R.id.txtViewSendFile);
+
+        /**
+         * Sets up a custom touch listener and detects swipes in 1 of 4 directions.
+         */
+        imgViewTop.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+            public void onSwipeTop() {
+                Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(MainActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /**
          * Opens a dialog for the user to choose a file selector to pick a file to send.
