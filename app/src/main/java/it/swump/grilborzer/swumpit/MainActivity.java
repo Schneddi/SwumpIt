@@ -106,16 +106,17 @@ public class MainActivity extends AppCompatActivity {
                     InputStream inputStream = getContentResolver().openInputStream(uri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
-                    txtViewFileName.setVisibility(View.INVISIBLE);
+                    txtViewFileName.setText("");
                     imgViewFile.setImageBitmap(bitmap);
                     inputStream.close();
                 }
                 // Displays the file name if it's no image. Doesn't work with some file pick apps
+                // TODO: Display file name of images as well. (Leads to NullPointerException as of right now)
                 else {
+                    imgViewFile.setImageResource(R.drawable.file);
+
                     // Calls getFilePath to retrieve storage path and file name from Intent Uri
                     txtViewFileName.setText(new File(getFilePath(this, uri)).getName());
-                    txtViewFileName.setVisibility(View.VISIBLE);
-
                 }
                 // Hide hint how to pick a file, but show hint how to send file.
                 txtViewPickFile.setVisibility(View.INVISIBLE);
