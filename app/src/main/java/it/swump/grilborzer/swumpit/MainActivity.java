@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
      * GUI components
      */
     private Button btnPickFile;
-    private ImageView imgViewPickedFile;
+    private ImageView imgViewFile;
 
     public static final int PICK_FILE = 1;
 
@@ -30,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Initialize all GUI components
          */
-        btnPickFile = findViewById(R.id.btnPickFile);
-        imgViewPickedFile = findViewById(R.id.imgViewPickedFile);
+
+        imgViewFile = findViewById(R.id.imgViewFile);
 
         /**
          * Opens a dialog for the user to choose a file selector to pick a file to send.
          */
-        btnPickFile.setOnClickListener(new View.OnClickListener() {
+        imgViewFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // TODO: Check if the file is an image
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                imgViewPickedFile.setImageBitmap(BitmapFactory.decodeStream(inputStream));
+                imgViewFile.setImageBitmap(BitmapFactory.decodeStream(inputStream));
 
                 inputStream.close();
             } catch (java.io.IOException e) {
